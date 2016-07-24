@@ -1,0 +1,35 @@
+---
+galaxy_info:
+  author: Wesley Tanaka
+  description: Install git
+  company: http://wtanaka.com
+  license: GPLv2
+  min_ansible_version: 1.5.4
+  platforms:
+    - name: Ubuntu
+      versions:
+      - trusty
+  platforms:
+  - name: Fedora
+    versions:
+    - 20
+    - 21
+    - 22
+    - 23
+  - name: Ubuntu
+    versions:
+    - precise
+    - quantal
+    - raring
+    - saucy
+    - trusty
+    - utopic
+    - vivid
+    - wily
+    - xenial
+  - name: Debian
+    versions:
+    - jessie
+  categories:
+  - development
+dependencies: []

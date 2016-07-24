@@ -1,0 +1,29 @@
+---
+- name: install python2-dnf on ansible 2.1/fedora 24
+  sudo: yes
+  raw: >
+    if command -v dnf; then
+       python -c "import dnf" ||
+       (command -v dnf && dnf install -y python2-dnf);
+    fi
+
+- name: detect if dnf exists
+  raw: command -v dnf
+  register: dnf_result
+  ignore_errors: True
+
+- set_fact:
+    backcompat_pkg_mgr: 'dnf'
+  when: dnf_result|success
+
+- set_fact:
+    backcompat_pkg_mgr: 'yum'
+  when: dnf_result|failed
+
+- name: install python2-dnf on ansible <=1.9.2/fedora 24
+  sudo: yes
+  raw: >
+    if command -v yum && ! command -v dnf; then
+       python -c "import yum" ||
+       (command -v yum && ! command -v dnf && yum install -y python2-yum);
+    fi
