@@ -6,10 +6,6 @@ galaxy_info:
   license: GPLv2
   min_ansible_version: 1.5.4
   platforms:
-    - name: Ubuntu
-      versions:
-      - trusty
-  platforms:
   - name: Fedora
     versions:
     - 20
