@@ -1,4 +1,6 @@
 ---
+- include: compat.yml
+
 - include: include_vars.yml
 
 - include: Debian.yml
@@ -7,15 +9,4 @@
 - include: RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- name: install git with default package manager
-  action: "{{backcompat_pkg_mgr}} name={{git_package_name}}"
-  sudo: yes
-  when: backcompat_pkg_mgr == "yum" or backcompat_pkg_mgr == "apt"
-
-# Use command since dnf was only added as a module in ansible 1.9.0
-- name: install git with dnf
-  command: dnf install -y {{git_package_name}}
-  args:
-    creates: /usr/bin/git
-  sudo: yes
-  when: backcompat_pkg_mgr == "dnf"
+- include: install_package_names.yml
