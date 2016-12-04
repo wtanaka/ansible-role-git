@@ -1,2 +1,3 @@
 ---
-git_package_name: git
+package_names:
+- git
