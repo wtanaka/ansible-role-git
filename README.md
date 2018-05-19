@@ -11,9 +11,20 @@ Example Playbook
 
     - hosts: all
       roles:
-         - git
+         - wtanaka.git
+
+### `git_should_shortcircuit`
+
+Default: True
+
+When True, this role short-circuits itself if a "git" is already in the path
+
+### All variables
+
+The full set of configuration options available are visible in
+[defaults/main.yml](defaults/main.yml)
 
 Author Information
 ------------------
 
-http://wtanaka.com/
+https://wtanaka.com/
