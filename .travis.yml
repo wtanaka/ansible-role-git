@@ -1,20 +1,65 @@
 language: ruby
 rvm:
 - 2.2
-- 2.1
-- 2.0
+#- 2.1
+#- 2.0
 - 1.9.3
+#cache:
+#  directories:
+#  - role-tester-ansible-master/.bootci/venv-ansible1.4
+#  - role-tester-ansible-master/.bootci/venv-ansible1.4.4
+#  - role-tester-ansible-master/.bootci/venv-ansible1.5.4
+#  - role-tester-ansible-master/.bootci/venv-ansible1.6.1
+#  - role-tester-ansible-master/.bootci/venv-ansible1.7.2
+#  - role-tester-ansible-master/.bootci/venv-ansible1.8.4
+#  - role-tester-ansible-master/.bootci/venv-ansible1.9.2
+#  - role-tester-ansible-master/.bootci/venv-ansible2.0.0.2
+#  - role-tester-ansible-master/.bootci/venv-ansible2.1.0.0
+env:
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=1.5.4
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=1.6.1
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=1.7.2
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=1.8.4
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=1.9.2
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=2.0.0.2
+- DOCKER_IMAGES=debian:8 ANSIBLE_VERSIONS=2.1.0.0
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=1.5.4
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=1.6.1
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=1.7.2
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=1.8.4
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=1.9.2
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=2.0.0.2
+- DOCKER_IMAGES=fedora:20 ANSIBLE_VERSIONS=2.1.0.0
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=1.5.4
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=1.6.1
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=1.7.2
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=1.8.4
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=1.9.2
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=2.0.0.2
+- DOCKER_IMAGES=fedora:24 ANSIBLE_VERSIONS=2.1.0.0
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=1.5.4
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=1.6.1
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=1.7.2
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=1.8.4
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=1.9.2
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=2.0.0.2
+- DOCKER_IMAGES=ubuntu:12.04 ANSIBLE_VERSIONS=2.1.0.0
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=1.5.4
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=1.6.1
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=1.7.2
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=1.8.4
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=1.9.2
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=2.0.0.2
+- DOCKER_IMAGES=ubuntu:14.04 ANSIBLE_VERSIONS=2.1.0.0
 sudo: required
 services:
 - docker
+#jobs:
+#  include:
+#    - stage: prepare cache
 script:
 - >
-  wget -qO- bit.ly/ansibletest | env
-  DOCKER_IMAGES="ubuntu:12.04 ubuntu:16.04 fedora:20 fedora:24
-  debian:8"
-  ANSIBLE_VERSIONS="1.5.4 1.6.1 1.7.2 1.8.4 1.9.2 2.0.0.2
-  2.1.0.0"
-  sh
+  wget -qO- bit.ly/ansibletest | sh
 after_failure:
 - cat role-tester-ansible-master/.kitchen/logs/*.log | grep -v '^I, '
 notifications:
